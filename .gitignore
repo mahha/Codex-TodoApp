@@ -26,3 +26,5 @@ worker-configuration.d.ts
 /test-results/
 /playwright-report/
 /playwright/.cache/
+
+.codex/
