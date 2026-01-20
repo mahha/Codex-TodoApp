@@ -2,42 +2,32 @@ export type Todo = {
   id: string;
   title: string;
   description: string;
-  status: "open" | "done";
-  tag: string;
-  dueLabel: string;
 };
 
 export const mockTodos: Todo[] = [
   {
     id: "todo-1",
-    title: "Design review with team",
-    description: "Finalize the flow for the new onboarding screens.",
-    status: "open",
-    tag: "Design",
-    dueLabel: "Today · 10:00",
+    title: "Grocery Shopping",
+    description: "Buy vegetables and fruits",
   },
   {
     id: "todo-2",
-    title: "Update project roadmap",
-    description: "Align milestones with Q2 priorities and dependencies.",
-    status: "open",
-    tag: "Planning",
-    dueLabel: "Today · 14:30",
+    title: "Finish Report",
+    description: "Due by EOD",
   },
   {
     id: "todo-3",
-    title: "Send weekly status report",
-    description: "Share progress, blockers, and next steps.",
-    status: "done",
-    tag: "Ops",
-    dueLabel: "Yesterday · 18:00",
+    title: "Call Plumber",
+    description: "Fix kitchen sink",
   },
   {
     id: "todo-4",
-    title: "Prepare demo assets",
-    description: "Polish screenshots and narrative for the demo.",
-    status: "open",
-    tag: "Marketing",
-    dueLabel: "Tomorrow · 09:00",
+    title: "Workout",
+    description: "1hour of cardio",
+  },
+  {
+    id: "todo-5",
+    title: "Read Book",
+    description: "Chapter 5 pof ‘Atomic Habits’",
   },
 ];
