@@ -27,4 +27,4 @@ worker-configuration.d.ts
 /playwright-report/
 /playwright/.cache/
 
-.codex/
+.claude
