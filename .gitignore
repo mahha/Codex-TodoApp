@@ -28,3 +28,4 @@ worker-configuration.d.ts
 /playwright/.cache/
 
 .claude
+codex-backup.tgz
