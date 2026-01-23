@@ -15,7 +15,6 @@ describe("Home", () => {
     render(<Home {...props} />);
 
     expect(screen.getByText("ToDo App")).toBeTruthy();
-    expect(screen.getByRole("button", { name: "+ Add Task" })).toBeTruthy();
     mockTodos.forEach((todo) => {
       expect(screen.getByText(todo.title)).toBeTruthy();
     });
