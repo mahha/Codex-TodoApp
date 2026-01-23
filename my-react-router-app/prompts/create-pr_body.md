@@ -6,6 +6,8 @@ compared to the main branch.
 You have been provided with issue identifiers via the ARGUMENTS argument.
 ARGUMENTS is a comma-separated list of GitHub issue numbers (e.g. "2,5,12").
 
+IMPORTANT: The ARGUMENTS value is provided as a string. You MUST parse it as a comma-separated list and use each issue number to generate "Closes #<number>" statements.
+
 You MUST use these issue numbers to generate "Closes #<number>" statements.
 You MUST NOT ask the user to clarify or re-enter issue numbers.
 
@@ -87,7 +89,7 @@ REQUIRED DESCRIPTION FORMAT
 - Closes #<issue_number>
 - Closes #<issue_number>
 
-(Repeat for all issue numbers parsed from ARGUMENTS)
+IMPORTANT: Replace `<issue_number>` placeholders above with the actual issue numbers parsed from ARGUMENTS. Generate one "Closes #<issue_number>" line for each issue number in ARGUMENTS.
 
 --------------------------------------------------
 ARGUMENT PARSING RULES

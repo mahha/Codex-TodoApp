@@ -30,6 +30,7 @@ STRICT RULES
 - You MUST stop and report if the plan is ambiguous or incomplete.
 
 You MAY:
+- Create a new branch for the implementation.
 - Modify source code.
 - Create or update test files.
 - Run tests, linters, and type checks.
@@ -46,16 +47,22 @@ EXECUTION STEPS
 
 1. Run `gh issue view "$ISSUES"` to retrieve the implementation plan.
 2. Read the issue body in full and understand all implementation tasks.
-3. Identify all files mentioned in the plan.
-4. Locate relevant code in the repository.
-5. Implement the required changes exactly as specified.
-6. Create or update tests exactly as specified in the plan.
-7. Run the following checks if available:
+3. Check the current branch status using `git status`.
+4. Create a new branch for this implementation:
+   - Branch name format: `issue-<ISSUES>` or `issue-<ISSUES>-<short-description>`
+   - Example: If ISSUES="123", use `issue-123` or `issue-123-todo-feature`
+   - Create and switch to the branch: `git checkout -b <branch-name>`
+   - If already on an appropriate branch, you may continue on that branch.
+5. Identify all files mentioned in the plan.
+6. Locate relevant code in the repository.
+7. Implement the required changes exactly as specified.
+8. Create or update tests exactly as specified in the plan.
+9. Run the following checks if available:
    - Unit tests (e.g. `npm run test`)
    - Linting (e.g. `npm run lint`)
    - Type checking (e.g. `npm run typecheck`)
-8. Fix any failures revealed by these checks.
-9. Create a single commit containing all changes.
+10. Fix any failures revealed by these checks.
+11. Create a single commit containing all changes.
 
 --------------------------------------------------
 COMMIT MESSAGE REQUIREMENTS
@@ -70,6 +77,8 @@ COMMIT MESSAGE REQUIREMENTS
   <detailed explanation>
 
   Implemented according to issue #<ISSUES>
+
+IMPORTANT: Replace `<ISSUES>` with the actual value of the ISSUES argument (e.g., if ISSUES="123", use "#123").
 
 --------------------------------------------------
 IMPLEMENTATION COMPLETION COMMENT
@@ -87,6 +96,8 @@ The comment body MUST strictly follow the format below.
 --------------------------------------------------
 REQUIRED COMMENT FORMAT
 --------------------------------------------------
+
+IMPORTANT: In the comment body template below, replace ALL occurrences of `<ISSUES>` with the actual value of the ISSUES argument (e.g., if ISSUES="123", replace `<ISSUES>` with "123").
 
 GitHub Issue #<ISSUES> - <issue title>
 

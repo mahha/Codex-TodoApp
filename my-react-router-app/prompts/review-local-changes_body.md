@@ -41,7 +41,9 @@ The file name MUST follow this format:
 <YYYY><Mon><DD>-<HH><MM>-issue<ISSUES>-review.md
 
 Example:
-2026Jan17-0832-issue2-review.md
+If ISSUES="2", the file name would be: 2026Jan17-0832-issue2-review.md
+
+IMPORTANT: Replace `<ISSUES>` in the file name template with the actual value of the ISSUES argument.
 
 Rules:
 - Use the current local date and time.
@@ -52,6 +54,8 @@ Rules:
 --------------------------------------------------
 REQUIRED REVIEW FILE CONTENT
 --------------------------------------------------
+
+IMPORTANT: In the review file content template below, replace ALL occurrences of `<ISSUES>` with the actual value of the ISSUES argument (e.g., if ISSUES="2", replace `<ISSUES>` with "2").
 
 # レビュー結果: Issue #<ISSUES>
 
