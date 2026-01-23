@@ -43,6 +43,14 @@ export default function Home({ loaderData }: Route.ComponentProps) {
           </ul>
         </section>
 
+        <div className="mt-10 flex justify-end">
+          <button
+            type="button"
+            className="rounded-full bg-[#2920af] px-4 py-2 text-sm font-normal text-white"
+          >
+            + Add Task
+          </button>
+        </div>
       </div>
     </main>
   );
