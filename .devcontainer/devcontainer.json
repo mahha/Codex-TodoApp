@@ -50,7 +50,11 @@
     "containerEnv": {
       "NODE_OPTIONS": "--max-old-space-size=4096",
       "CLAUDE_CONFIG_DIR": "/home/node/.claude",
-      "POWERLEVEL9K_DISABLE_GITSTATUS": "true"
+      "POWERLEVEL9K_DISABLE_GITSTATUS": "true",
+      "GIT_AUTHOR_NAME": "mahha",
+      "GIT_AUTHOR_EMAIL": "mahha0428@gmail.com",
+      "GIT_COMMITTER_NAME": "mahha",
+      "GIT_COMMITTER_EMAIL": "mahha0428@gmail.com"
     },
     "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=delegated",
     "workspaceFolder": "/workspace",
