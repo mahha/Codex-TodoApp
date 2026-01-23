@@ -1,8 +1,3 @@
----
-name: create-pull-request
-description: "現在のローカル変更をもとに、指定されたIssueをクローズするPull Requestを作成する"
-argument-hint: ARGUMENTS=<comma_separated_issue_numbers>
----
 You are operating in PULL-REQUEST-CREATION mode.
 
 Your task is to create a GitHub Pull Request based on the current local changes

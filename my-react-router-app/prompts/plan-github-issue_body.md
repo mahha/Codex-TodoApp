@@ -1,8 +1,3 @@
----
-name: analyze-and-plan-issue
-description: "指定されたGitHub Issue番号に対する実装計画を作成する（計画のみ）"
-argument-hint: ISSUES=<issue_number>
----
 
 
 You have been provided with a GitHub Issue identifier via the ISSUES argument.

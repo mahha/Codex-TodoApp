@@ -1,8 +1,3 @@
----
-name: review-local-changes
-description: "指定されたGitHub Issueに基づき、ローカル変更をレビューして日本語でレビューコメントを出力する"
-argument-hint: ISSUES=<issue_number_or_plan_issue_number>
----
 You are operating in REVIEW mode.
 
 You have been provided with a GitHub Issue identifier via the ISSUES argument.
