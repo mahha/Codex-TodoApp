@@ -52,13 +52,36 @@ npm run build
 
 Deployment is done using the Wrangler CLI.
 
+The production build output is placed under `build/`:
+- `build/client` for static assets
+- `build/server` for the SSR bundle
+
+Static assets are served from the `build/client` directory via the Workers `ASSETS`
+binding defined in `wrangler.jsonc`. Files in `public/` are copied into `build/client`
+by the build.
+
 To build and deploy directly to production:
 
 ```sh
 npm run deploy
 ```
 
-To deploy a preview URL:
+To deploy a preview environment (configure a preview environment in
+`wrangler.jsonc` first):
+
+```sh
+npx wrangler deploy --env preview
+```
+
+To set environment variables and secrets:
+
+```sh
+# Plain vars live in wrangler.jsonc
+# Secrets are stored via Wrangler
+npx wrangler secret put SOME_SECRET
+```
+
+To deploy a preview URL using versioned releases:
 
 ```sh
 npx wrangler versions upload
