@@ -42,7 +42,7 @@ Local development uses SQLite, while production uses Cloudflare D1. Configure th
 Apply migrations to D1:
 
 ```bash
-npx wrangler d1 migrations apply todo-db
+npx wrangler d1 migrations apply codex-todo-db
 ```
 
 ### Seeding
@@ -57,7 +57,7 @@ Generate seed SQL for D1 and apply it:
 
 ```bash
 npx tsx db/seed.ts --print-sql > /tmp/todo-seed.sql
-npx wrangler d1 execute todo-db --file /tmp/todo-seed.sql
+npx wrangler d1 execute codex-todo-db --file /tmp/todo-seed.sql
 ```
 
 ## Previewing the Production Build
