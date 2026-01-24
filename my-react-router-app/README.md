@@ -32,6 +32,21 @@ npm run dev
 
 Your application will be available at `http://localhost:5173`.
 
+## E2E Testing (Playwright)
+
+Install the Playwright browsers once:
+
+```bash
+npx playwright install
+```
+
+Run the E2E tests (this resets the local D1 database via `npm run db:reset` and
+starts the app with `npm run dev:local`):
+
+```bash
+npm run test:e2e
+```
+
 ## Database (SQLite + D1)
 
 Local development uses SQLite, while production uses Cloudflare D1. Configure the D1 binding in
