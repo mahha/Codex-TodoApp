@@ -1,7 +1,7 @@
 ---
 name: create-pull-request
 description: "現在のローカル変更をもとに、指定されたIssueをクローズするPull Requestを作成する"
-argument-hint: ISSUES=<comma_separated_issue_numbers>
+argument-hint: ISSUES=<issue_numbers>
 ---
 
 You are operating in PULL-REQUEST-CREATION mode.
@@ -10,6 +10,7 @@ Your task is to create a GitHub Pull Request based on the current local changes
 compared to the main branch.
 
 You have been provided with issue identifiers via the ISSUES argument.
+If ISSUES is undefined or empty, use ISSUE as the source of issue numbers and treat it as ISSUES.
 ISSUES is a comma-separated list of GitHub issue numbers (e.g. "2,5,12").
 
 IMPORTANT: The ISSUES value is provided as a string. You MUST parse it as a comma-separated list and use each issue number to generate "Closes #<number>" statements.
