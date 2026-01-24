@@ -2,12 +2,19 @@ import { render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 import type { Route } from "./+types/home";
 import Home from "./home";
-import { mockTodos } from "../lib/todos";
+import { seedTodos } from "../lib/seed-data";
+
+const todos = seedTodos.map((todo, index) => ({
+  id: `seed-${index + 1}`,
+  title: todo.title,
+  description: todo.description,
+  createdAt: new Date().toISOString(),
+}));
 
 describe("Home", () => {
   it("renders the todo list", () => {
     const props: Route.ComponentProps = {
-      loaderData: { todos: mockTodos },
+      loaderData: { todos },
       params: {},
       matches: [] as unknown as Route.ComponentProps["matches"],
     };
@@ -16,7 +23,7 @@ describe("Home", () => {
 
     expect(screen.getByText("ToDo App")).toBeTruthy();
     expect(screen.getByRole("button", { name: "+ Add Task" })).toBeTruthy();
-    mockTodos.forEach((todo) => {
+    todos.forEach((todo) => {
       expect(screen.getByText(todo.title)).toBeTruthy();
     });
   });
