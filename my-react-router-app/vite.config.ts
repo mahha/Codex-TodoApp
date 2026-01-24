@@ -11,4 +11,8 @@ export default defineConfig({
     reactRouter(),
     tsconfigPaths(),
   ],
+  server: {
+    host: process.env.DEV_HOST ?? "host.docker.internal",
+    port: 5173,
+  },
 });

@@ -32,6 +32,34 @@ npm run dev
 
 Your application will be available at `http://localhost:5173`.
 
+## Database (SQLite + D1)
+
+Local development uses SQLite, while production uses Cloudflare D1. Configure the D1 binding in
+`wrangler.jsonc` (update `database_id` to match your D1 instance).
+
+### Migrations
+
+Apply migrations to D1:
+
+```bash
+npx wrangler d1 migrations apply codex-todo-db
+```
+
+### Seeding
+
+Seed the local SQLite database (applies migrations + inserts seed data):
+
+```bash
+npx tsx db/seed.ts
+```
+
+Generate seed SQL for D1 and apply it:
+
+```bash
+npx tsx db/seed.ts --print-sql > /tmp/todo-seed.sql
+npx wrangler d1 execute codex-todo-db --file /tmp/todo-seed.sql
+```
+
 ## Previewing the Production Build
 
 Preview the production build locally:

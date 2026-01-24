@@ -1,5 +1,5 @@
 import type { Route } from "./+types/home";
-import { mockTodos } from "../lib/todos";
+import { getTodoRepository, type TodoRepository } from "../lib/todos.server";
 
 export function meta() {
   return [
@@ -8,8 +8,16 @@ export function meta() {
   ];
 }
 
-export function loader() {
-  return { todos: mockTodos };
+export function createHomeLoader(repository: TodoRepository) {
+  return async function loadHomeTodos() {
+    const todos = await repository.listTodos();
+    return { todos };
+  };
+}
+
+export async function loader({ context }: Route.LoaderArgs) {
+  const repository = await getTodoRepository({ env: context.cloudflare.env });
+  return createHomeLoader(repository)();
 }
 
 export default function Home({ loaderData }: Route.ComponentProps) {

@@ -11,6 +11,14 @@
 		"directory": "./build/client",
 		"binding": "ASSETS"
 	},
+	"d1_databases": [
+		{
+			"binding": "DB",
+			"database_name": "codex-todo-db",
+			"database_id": "36270fa4-d365-44d4-930f-bdbb430e6e39",
+			"migrations_dir": "db/migrations"
+		}
+	],
 	"vars": {
 		"VALUE_FROM_CLOUDFLARE": "Hello from Cloudflare"
 	},
