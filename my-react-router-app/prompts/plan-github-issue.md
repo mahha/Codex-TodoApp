@@ -25,13 +25,16 @@ and create a detailed implementation plan.
 
 Follow these steps:
 
-1. Run `gh issue view "$ISSUES"` to retrieve the issue details.
+1. Run `gh issue view "$ISSUES" --json title,body,labels,state,assignees,number` to retrieve the issue details.
 2. Understand and summarize the problem.
 3. Infer relevant parts of the codebase (high-level only).
 4. Produce an implementation plan using the required format below.
 5. Create a new sub-issue under the original issue:
    - Title: "<original issue title>[実装計画]"
    - Content: implementation plan ONLY.
+6. Link the new sub-issue on the original issue using a task list:
+   - Append (or create) a "Sub-issues" section with `- [ ] #<new_sub_issue_number>`
+   - Use `gh issue edit` to update the parent issue body
 
 IMPORTANT:
 - Assume ISSUES is already known and valid.
@@ -92,6 +95,6 @@ For each task:
 IMPORTANT:
 - The goal is to produce a plan at the same level of detail as a senior engineer's design proposal.
 - Do NOT include diffs, commits, or executable commands.
-- The only GitHub write operation allowed is creating the sub-issue using `gh`.
+- The only GitHub write operations allowed are creating the sub-issue and linking it on the parent issue via task list using `gh`.
 
 Use GitHub CLI (`gh`) for all GitHub-related actions.
