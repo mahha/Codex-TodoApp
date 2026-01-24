@@ -1,7 +1,7 @@
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { afterEach, describe, expect, it } from "vitest";
-import { openSqliteDatabase } from "../../app/lib/db.server";
+import { openSqliteDatabase } from "../../app/lib/sqlite.server";
 import { seedTodos } from "../../app/lib/seed-data";
 import { createSqliteTodoRepository } from "../../app/lib/todos.server";
 import { createHomeLoader } from "../../app/routes/home";
