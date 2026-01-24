@@ -15,7 +15,7 @@
 		{
 			"binding": "DB",
 			"database_name": "codex-todo-db",
-			"database_id": "YOUR_D1_DATABASE_ID",
+			"database_id": "36270fa4-d365-44d4-930f-bdbb430e6e39",
 			"migrations_dir": "db/migrations"
 		}
 	],
