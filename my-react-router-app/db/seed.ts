@@ -1,3 +1,5 @@
+import { readdirSync, readFileSync } from "node:fs";
+import { join } from "node:path";
 import { seedTodos } from "../app/lib/seed-data";
 import { openSqliteDatabase } from "../app/lib/sqlite.server";
 import { createSqliteTodoRepository } from "../app/lib/todos.server";
@@ -30,11 +32,26 @@ const buildSeedSql = () => {
     .join("\n");
 };
 
+const migrationsDir = join(process.cwd(), "db", "migrations");
+
+function applyMigrations(db: Awaited<ReturnType<typeof openSqliteDatabase>>) {
+  const migrationFiles = readdirSync(migrationsDir)
+    .filter((file) => file.endsWith(".sql"))
+    .sort();
+
+  for (const file of migrationFiles) {
+    const sql = readFileSync(join(migrationsDir, file), "utf8");
+    db.exec(sql);
+  }
+}
+
 async function seedLocalDatabase() {
   const dbPath = process.env.TODO_DB_PATH ?? "db/local.sqlite";
   const db = await openSqliteDatabase(dbPath);
-  const repository = createSqliteTodoRepository(db);
 
+  applyMigrations(db);
+
+  const repository = createSqliteTodoRepository(db);
   for (const todo of seedTodos) {
     await repository.createTodo(todo);
   }
