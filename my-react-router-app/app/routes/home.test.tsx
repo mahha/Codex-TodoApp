@@ -9,6 +9,7 @@ const todos = seedTodos.map((todo, index) => ({
   title: todo.title,
   description: todo.description,
   createdAt: new Date().toISOString(),
+  completed: todo.completed,
 }));
 
 describe("Home", () => {

@@ -5,6 +5,7 @@ import type { TodoInput } from "../lib/todos";
 type TodoPayload = {
   title: string;
   description: string;
+  completed?: boolean;
 };
 
 const badRequest = (message: string) =>
@@ -19,11 +20,14 @@ const isTodoPayload = (value: unknown): value is TodoPayload => {
   }
 
   const candidate = value as Partial<TodoPayload>;
+  const completedValid =
+    candidate.completed === undefined || typeof candidate.completed === "boolean";
   return (
     typeof candidate.title === "string" &&
     candidate.title.trim().length > 0 &&
     typeof candidate.description === "string" &&
-    candidate.description.trim().length > 0
+    candidate.description.trim().length > 0 &&
+    completedValid
   );
 };
 
@@ -44,7 +48,11 @@ export function createTodosHandlers(repository: TodoRepository) {
         if (!isTodoPayload(body)) {
           return badRequest("Invalid todo payload.");
         }
-        payload = { title: body.title.trim(), description: body.description.trim() };
+        payload = {
+          title: body.title.trim(),
+          description: body.description.trim(),
+          completed: body.completed,
+        };
       } catch {
         return badRequest("Invalid JSON payload.");
       }

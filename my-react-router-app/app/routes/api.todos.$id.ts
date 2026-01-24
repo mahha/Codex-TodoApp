@@ -37,7 +37,18 @@ const parsePartialPayload = (value: unknown): PartialTodoPayload | null => {
     payload.description = candidate.description.trim();
   }
 
-  if (!payload.title && !payload.description) {
+  if (candidate.completed !== undefined) {
+    if (typeof candidate.completed !== "boolean") {
+      return null;
+    }
+    payload.completed = candidate.completed;
+  }
+
+  if (
+    payload.title === undefined &&
+    payload.description === undefined &&
+    payload.completed === undefined
+  ) {
     return null;
   }
 

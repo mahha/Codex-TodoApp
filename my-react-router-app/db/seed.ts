@@ -13,17 +13,19 @@ const buildSeedSql = () => {
       title: todo.title,
       description: todo.description,
       created_at: createdAt,
+      completed: todo.completed ? 1 : 0,
     };
   });
 
   return statements
     .map(
       (todo) =>
-        "INSERT INTO todos (id, title, description, created_at) VALUES (" +
+        "INSERT INTO todos (id, title, description, created_at, completed) VALUES (" +
         `'${todo.id}', ` +
         `'${todo.title.replace(/'/g, "''")}', ` +
         `'${todo.description.replace(/'/g, "''")}', ` +
-        `'${todo.created_at}');`
+        `'${todo.created_at}', ` +
+        `${todo.completed});`
     )
     .join("\n");
 };

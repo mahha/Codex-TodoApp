@@ -6,6 +6,7 @@ type TodoRow = {
   title: string;
   description: string;
   created_at: string;
+  completed: number;
 };
 
 export type TodoRepository = {
@@ -21,13 +22,14 @@ const mapTodoRow = (row: TodoRow): Todo => ({
   title: row.title,
   description: row.description,
   createdAt: row.created_at,
+  completed: Boolean(row.completed),
 });
 
 export function createD1TodoRepository(db: D1Database): TodoRepository {
   const listTodos = async () => {
     const result = await db
       .prepare(
-        "SELECT id, title, description, created_at FROM todos ORDER BY created_at DESC"
+        "SELECT id, title, description, created_at, completed FROM todos ORDER BY created_at DESC"
       )
       .all<TodoRow>();
     return result.results.map(mapTodoRow);
@@ -35,7 +37,9 @@ export function createD1TodoRepository(db: D1Database): TodoRepository {
 
   const getTodo = async (id: string) => {
     const result = await db
-      .prepare("SELECT id, title, description, created_at FROM todos WHERE id = ?")
+      .prepare(
+        "SELECT id, title, description, created_at, completed FROM todos WHERE id = ?"
+      )
       .bind(id)
       .first<TodoRow>();
     return result ? mapTodoRow(result) : null;
@@ -44,13 +48,20 @@ export function createD1TodoRepository(db: D1Database): TodoRepository {
   const createTodo = async (input: TodoInput) => {
     const id = crypto.randomUUID();
     const createdAt = new Date().toISOString();
+    const completed = input.completed ? 1 : 0;
     await db
       .prepare(
-        "INSERT INTO todos (id, title, description, created_at) VALUES (?, ?, ?, ?)"
+        "INSERT INTO todos (id, title, description, created_at, completed) VALUES (?, ?, ?, ?, ?)"
       )
-      .bind(id, input.title, input.description, createdAt)
+      .bind(id, input.title, input.description, createdAt, completed)
       .run();
-    return { id, title: input.title, description: input.description, createdAt };
+    return {
+      id,
+      title: input.title,
+      description: input.description,
+      createdAt,
+      completed: Boolean(completed),
+    };
   };
 
   const updateTodo = async (id: string, input: Partial<TodoInput>) => {
@@ -61,11 +72,14 @@ export function createD1TodoRepository(db: D1Database): TodoRepository {
 
     const title = input.title ?? existing.title;
     const description = input.description ?? existing.description;
+    const completed = input.completed ?? existing.completed;
     await db
-      .prepare("UPDATE todos SET title = ?, description = ? WHERE id = ?")
-      .bind(title, description, id)
+      .prepare(
+        "UPDATE todos SET title = ?, description = ?, completed = ? WHERE id = ?"
+      )
+      .bind(title, description, completed ? 1 : 0, id)
       .run();
-    return { ...existing, title, description };
+    return { ...existing, title, description, completed };
   };
 
   const deleteTodo = async (id: string) => {
@@ -83,7 +97,7 @@ export function createSqliteTodoRepository(db: SqliteDatabase): TodoRepository {
   const listTodos = async () => {
     const rows = db
       .prepare(
-        "SELECT id, title, description, created_at FROM todos ORDER BY created_at DESC"
+        "SELECT id, title, description, created_at, completed FROM todos ORDER BY created_at DESC"
       )
       .all() as TodoRow[];
     return rows.map(mapTodoRow);
@@ -91,7 +105,9 @@ export function createSqliteTodoRepository(db: SqliteDatabase): TodoRepository {
 
   const getTodo = async (id: string) => {
     const row = db
-      .prepare("SELECT id, title, description, created_at FROM todos WHERE id = ?")
+      .prepare(
+        "SELECT id, title, description, created_at, completed FROM todos WHERE id = ?"
+      )
       .get(id) as TodoRow | undefined;
     return row ? mapTodoRow(row) : null;
   };
@@ -99,10 +115,17 @@ export function createSqliteTodoRepository(db: SqliteDatabase): TodoRepository {
   const createTodo = async (input: TodoInput) => {
     const id = crypto.randomUUID();
     const createdAt = new Date().toISOString();
+    const completed = input.completed ? 1 : 0;
     db.prepare(
-      "INSERT INTO todos (id, title, description, created_at) VALUES (?, ?, ?, ?)"
-    ).run(id, input.title, input.description, createdAt);
-    return { id, title: input.title, description: input.description, createdAt };
+      "INSERT INTO todos (id, title, description, created_at, completed) VALUES (?, ?, ?, ?, ?)"
+    ).run(id, input.title, input.description, createdAt, completed);
+    return {
+      id,
+      title: input.title,
+      description: input.description,
+      createdAt,
+      completed: Boolean(completed),
+    };
   };
 
   const updateTodo = async (id: string, input: Partial<TodoInput>) => {
@@ -113,12 +136,11 @@ export function createSqliteTodoRepository(db: SqliteDatabase): TodoRepository {
 
     const title = input.title ?? existing.title;
     const description = input.description ?? existing.description;
-    db.prepare("UPDATE todos SET title = ?, description = ? WHERE id = ?").run(
-      title,
-      description,
-      id
-    );
-    return { ...existing, title, description };
+    const completed = input.completed ?? existing.completed;
+    db.prepare(
+      "UPDATE todos SET title = ?, description = ?, completed = ? WHERE id = ?"
+    ).run(title, description, completed ? 1 : 0, id);
+    return { ...existing, title, description, completed };
   };
 
   const deleteTodo = async (id: string) => {
