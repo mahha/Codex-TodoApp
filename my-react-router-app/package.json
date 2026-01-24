@@ -8,7 +8,7 @@
 		"deploy": "npm run build && wrangler deploy",
 		"dev": "wrangler dev --local --persist-to .wrangler/state --port 5173",
 		"db:create": "wrangler d1 execute todo-db --local --command \"SELECT 1\"",
-		"db:create-remote": "wrangler d1 execute todo-db --remote --command \"SELECT 1\"",
+		"db:create-remote": "wrangler d1 create todo-db",
 		"db:migrate": "wrangler d1 migrations apply todo-db --local",
 		"db:migrate-remote": "wrangler d1 migrations apply todo-db --remote",
 		"db:seed": "tsx db/seed.ts --print-sql > /tmp/todo-seed.sql && wrangler d1 execute todo-db --local --file /tmp/todo-seed.sql",
