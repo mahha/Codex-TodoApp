@@ -1,4 +1,5 @@
 import { render, screen } from "@testing-library/react";
+import { createMemoryRouter, RouterProvider } from "react-router";
 import { describe, expect, it } from "vitest";
 import type { Route } from "./+types/home";
 import Home from "./home";
@@ -20,10 +21,20 @@ describe("Home", () => {
       matches: [] as unknown as Route.ComponentProps["matches"],
     };
 
-    render(<Home {...props} />);
+    const router = createMemoryRouter(
+      [
+        {
+          path: "/",
+          element: <Home {...props} />,
+        },
+      ],
+      { initialEntries: ["/"] }
+    );
+
+    render(<RouterProvider router={router} />);
 
     expect(screen.getByText("ToDo App")).toBeTruthy();
-    expect(screen.getByRole("button", { name: "+ Add Task" })).toBeTruthy();
+    expect(screen.getByRole("link", { name: "+ Add" })).toBeTruthy();
     todos.forEach((todo) => {
       expect(screen.getByText(todo.title)).toBeTruthy();
     });

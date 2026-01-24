@@ -1,4 +1,5 @@
 import type { Route } from "./+types/home";
+import { Link } from "react-router";
 import { getTodoRepository, type TodoRepository } from "../lib/todos.server";
 
 export function meta() {
@@ -56,12 +57,12 @@ export default function Home({ loaderData }: Route.ComponentProps) {
         </section>
 
         <div className="mt-10 flex justify-end">
-          <button
-            type="button"
-            className="rounded-full bg-[#2920af] px-4 py-2 text-sm font-normal text-white"
+          <Link
+            to="/todos/new"
+            className="rounded-full bg-[#2920af] px-4 py-2 text-sm font-normal text-white shadow-sm transition duration-200 ease-out hover:-translate-y-0.5 hover:brightness-110 hover:shadow-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2920af]"
           >
-            + Add Task
-          </button>
+            + Add
+          </Link>
         </div>
       </div>
     </main>
