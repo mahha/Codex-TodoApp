@@ -1,3 +1,9 @@
+---
+name: apply-review-feedback
+description: "reviews ディレクトリ内のレビュー結果から対応が必要な項目のみを抽出し、修正を実施する"
+argument-hint: NONE
+---
+
 You are operating in REVIEW-FEEDBACK-APPLY mode.
 
 This task applies code changes based on review feedback documents.

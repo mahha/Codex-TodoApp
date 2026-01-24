@@ -14,11 +14,15 @@ export function loader() {
 
 export default function Home({ loaderData }: Route.ComponentProps) {
   const { todos } = loaderData;
+  const name = "name";
 
   return (
     <main className="min-h-screen bg-white text-black">
       <div className="mx-auto w-full max-w-md px-6 pb-14 pt-8">
         <h1 className="text-center text-xl font-bold">ToDo App</h1>
+        <p className="mt-2 text-center text-sm text-neutral-600">
+          こんにちは、{name}さん
+        </p>
 
         <section className="mt-6">
           <ul className="space-y-5">

@@ -1,12 +1,18 @@
+---
+name: create-pull-request
+description: "現在のローカル変更をもとに、指定されたIssueをクローズするPull Requestを作成する"
+argument-hint: ISSUES=<comma_separated_issue_numbers>
+---
+
 You are operating in PULL-REQUEST-CREATION mode.
 
 Your task is to create a GitHub Pull Request based on the current local changes
 compared to the main branch.
 
-You have been provided with issue identifiers via the ARGUMENTS argument.
-ARGUMENTS is a comma-separated list of GitHub issue numbers (e.g. "2,5,12").
+You have been provided with issue identifiers via the ISSUES argument.
+ISSUES is a comma-separated list of GitHub issue numbers (e.g. "2,5,12").
 
-IMPORTANT: The ARGUMENTS value is provided as a string. You MUST parse it as a comma-separated list and use each issue number to generate "Closes #<number>" statements.
+IMPORTANT: The ISSUES value is provided as a string. You MUST parse it as a comma-separated list and use each issue number to generate "Closes #<number>" statements.
 
 You MUST use these issue numbers to generate "Closes #<number>" statements.
 You MUST NOT ask the user to clarify or re-enter issue numbers.
@@ -71,7 +77,7 @@ The Pull Request description MUST:
 
 - Be written entirely in Japanese
 - Include a clear summary of what was changed
-- Reference ALL issues provided in ARGUMENTS
+- Reference ALL issues provided in ISSUES
 - Include "Closes #<issue_number>" for each issue
 
 --------------------------------------------------
@@ -89,19 +95,19 @@ REQUIRED DESCRIPTION FORMAT
 - Closes #<issue_number>
 - Closes #<issue_number>
 
-IMPORTANT: Replace `<issue_number>` placeholders above with the actual issue numbers parsed from ARGUMENTS. Generate one "Closes #<issue_number>" line for each issue number in ARGUMENTS.
+IMPORTANT: Replace `<issue_number>` placeholders above with the actual issue numbers parsed from ISSUES. Generate one "Closes #<issue_number>" line for each issue number in ISSUES.
 
 --------------------------------------------------
 ARGUMENT PARSING RULES
 --------------------------------------------------
 
-- Parse ARGUMENTS as a comma-separated list.
+- Parse ISSUES as a comma-separated list.
 - Trim whitespace around each issue number.
 - Generate one "Closes #<number>" line per issue.
 - Preserve the original order of issue numbers.
 
 Example:
-ARGUMENTS = "123, 456"
+ISSUES = "123, 456"
 
 →
 - Closes #123
