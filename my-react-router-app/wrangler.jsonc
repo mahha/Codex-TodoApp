@@ -7,12 +7,16 @@
 	"name": "my-react-router-app",
 	"compatibility_date": "2025-04-04",
 	"main": "./workers/app.ts",
+	"assets": {
+		"directory": "./build/client",
+		"binding": "ASSETS"
+	},
 	"vars": {
 		"VALUE_FROM_CLOUDFLARE": "Hello from Cloudflare"
 	},
 	"observability": {
 		"enabled": true
-	}
+	},
 	/**
 	 * Smart Placement
 	 * https://developers.cloudflare.com/workers/configuration/smart-placement/#smart-placement
