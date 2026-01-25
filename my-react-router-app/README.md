@@ -47,6 +47,12 @@ starts the app with `npm run dev:local`):
 npm run test:e2e
 ```
 
+Run the E2E tests and serve the HTML report at `http://localhost:9324/`:
+
+```bash
+npm run test:e2e-report
+```
+
 ## Database (SQLite + D1)
 
 Local development uses SQLite, while production uses Cloudflare D1. Configure the D1 binding in
