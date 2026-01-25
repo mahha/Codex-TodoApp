@@ -22,7 +22,7 @@
 		"lint": "eslint .",
 		"test": "vitest",
 		"test:e2e": "playwright test",
-		"test:e2e-report": "npm run test:e2e && python3 -m http.server 9324 --directory playwright-report",
+		"test:e2e-report": "playwright show-report playwright-report --host localhost",
 		"typecheck": "npm run cf-typegen && react-router typegen && tsc -b"
 	},
 	"dependencies": {

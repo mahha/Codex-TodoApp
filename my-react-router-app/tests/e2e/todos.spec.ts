@@ -20,4 +20,25 @@ test("create todo from the form and see it on the list", async ({ page }) => {
 
   const createdTodo = page.getByRole("listitem").filter({ hasText: title });
   await expect(createdTodo).toContainText(description);
+
+  const activeTab = page.getByRole("link", { name: "未完了", exact: true });
+  const completedTab = page.getByRole("link", { name: "完了", exact: true });
+
+  await expect(activeTab).toBeVisible();
+  await expect(completedTab).toBeVisible();
+
+  await createdTodo.getByRole("checkbox", { name: title }).click();
+  await expect(createdTodo).toHaveCount(0);
+
+  await completedTab.click();
+  const completedTodo = page.getByRole("listitem").filter({ hasText: title });
+  await expect(completedTodo).toContainText(description);
+
+  await completedTodo.getByRole("checkbox", { name: title }).click();
+  await expect(completedTodo).toHaveCount(0);
+
+  await activeTab.click();
+  await expect(page.getByRole("listitem").filter({ hasText: title })).toContainText(
+    description
+  );
 });
