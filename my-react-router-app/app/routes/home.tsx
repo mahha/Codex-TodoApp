@@ -44,6 +44,14 @@ export default function Home({ loaderData }: Route.ComponentProps) {
     );
   }, [todoItems, currentStatus]);
 
+  const errorMessages = useMemo(() => {
+    return Object.entries(errorById).map(([id, message]) => {
+      const todoTitle = todoItems.find((todo) => todo.id === id)?.title;
+      const label = todoTitle ?? "タスク";
+      return `${label}：${message}`;
+    });
+  }, [errorById, todoItems]);
+
   const toggleTodo = async (todo: Todo) => {
     const nextCompleted = !todo.completed;
 
@@ -132,6 +140,19 @@ export default function Home({ loaderData }: Route.ComponentProps) {
             </div>
           </div>
 
+          {errorMessages.length > 0 ? (
+            <div
+              className="mt-5 rounded-2xl border border-red-200 bg-red-50 px-4 py-3 text-xs text-red-700"
+              role="alert"
+            >
+              <ul className="space-y-1">
+                {errorMessages.map((message) => (
+                  <li key={message}>{message}</li>
+                ))}
+              </ul>
+            </div>
+          ) : null}
+
           <ul className="mt-6 space-y-5">
             {visibleTodos.map((todo) => {
               const isUpdating = Boolean(updatingIds[todo.id]);
@@ -167,11 +188,6 @@ export default function Home({ loaderData }: Route.ComponentProps) {
                       {isUpdating ? (
                         <p className="mt-2 text-xs text-neutral-500">
                           更新中...
-                        </p>
-                      ) : null}
-                      {errorById[todo.id] ? (
-                        <p className="mt-2 text-xs text-red-600">
-                          {errorById[todo.id]}
                         </p>
                       ) : null}
                     </div>
